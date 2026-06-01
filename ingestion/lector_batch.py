@@ -2,8 +2,14 @@ import pandas as pd
 from pathlib import Path
 
 def leer_datos_batch(ruta_archivo="asistencia_gimnasio.csv"):
-    source = Path(__file__).resolve().parents[1] / ruta_archivo
-    df = pd.read_csv(source)
+
+    try: 
+
+        source = Path(__file__).resolve().parents[1] / ruta_archivo
+        df = pd.read_csv(source)
+    except FileNotFoundError:
+        print(f"Archivo no encontrado: {ruta_archivo}")
+        return pd.DataFrame()
 
     columnas_clave = ["fecha","hora","nombre","apellido","edad"]
     df_filtrado = df[columnas_clave]

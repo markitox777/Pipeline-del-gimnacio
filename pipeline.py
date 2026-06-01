@@ -87,18 +87,23 @@ def ejecutar_pipeline():
 
     # KPI 1 - Total registros
     total_registros = len(df)
-
+    print(f"KpI 1 - Total registros: {total_registros}")
+    
     # KPI 2 - Total columnas
     total_columnas = len(df.columns)
+    print(f"KPI 2 - Total columnas: {total_columnas}")
 
     # KPI 3 - Valores nulos
     total_nulos = df.isnull().sum().sum()
+    print(f"KPI 3 - Total valores nulos: {total_nulos}")
 
     # KPI 4 - Registros duplicados
     duplicados = df.duplicated().sum()
+    print(f"KPI 4 - Registros duplicados: {duplicados}")
 
     # KPI 5 - Edades negativas
     edades_negativas = len(df[df["edad"] < 0])
+    print(f"KPI 5 - Edades negativas: {edades_negativas}")
 
     # KPI 6 - Porcentaje completitud
     total_celdas = df.shape[0] * df.shape[1]
@@ -106,11 +111,13 @@ def ejecutar_pipeline():
     completitud = (
         ((total_celdas - total_nulos) / total_celdas) * 100
     )
+    print(f"KPI 6 - Porcentaje completitud: {completitud:.2f}%")
 
     # KPI 7 - Tiempo ejecución
     fin_pipeline = time.time()
 
     tiempo_ejecucion = fin_pipeline - inicio_pipeline
+    print(f"KPI 7 - Tiempo total ejecución: {tiempo_ejecucion:.2f} segundos")
 
     #kpis agregados a logs
     logging.info(f"Total registros procesados: {total_registros}")
@@ -124,10 +131,13 @@ def ejecutar_pipeline():
 
     #mostramos los datos de los kpis
     with open("output/kpis.txt", "w") as archivo:
-        archivo.write(f"Total registros: {total_registros}\n")
-        archivo.write(f"Duplicados: {duplicados}\n")
-        archivo.write(f"Nulos: {total_nulos}\n")
-        archivo.write(f"Tiempo ejecución: {tiempo_ejecucion:.2f}\n")
+        archivo.write(f"KPI 1 - Total registros: {total_registros}\n")
+        archivo.write(f"KPI 2 - Total columnas: {total_columnas}\n")
+        archivo.write(f"KPI 3 - Total valores nulos: {total_nulos}\n")
+        archivo.write(f"KPI 4 - Registros duplicados: {duplicados}\n")
+        archivo.write(f"KPI 5 - Edades negativas: {edades_negativas}\n")
+        archivo.write(f"KPI 6 - Porcentaje completitud: {completitud:.2f}%\n")
+        archivo.write(f"KPI 7 - Tiempo total ejecución: {tiempo_ejecucion:.2f} segundos\n")
     return almacen_datos
 
 

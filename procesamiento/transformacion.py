@@ -79,6 +79,7 @@ def generar_transformaciones(almacen_datos):
 
         # Normalización 0-1
         df["edad_normalizada"] = scaler.fit_transform(df[["edad"]])
+        df["edad_normalizada"] = df["edad_normalizada"].round(2)
 
         print("[INFO] Columna 'edad_normalizada' creada.")
         logging.info("Columna 'edad_normalizada' creada.")
@@ -118,7 +119,6 @@ def generar_transformaciones(almacen_datos):
 
         print("[WARNING] Existen edades negativas.")
         logging.warning("Existen edades negativas.")
-
     else:
 
         print("[INFO] Validación de edades completada correctamente.")
