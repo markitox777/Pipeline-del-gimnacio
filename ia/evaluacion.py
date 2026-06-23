@@ -36,19 +36,22 @@ def evaluar_modelos(
     precision_log = precision_score(
     y_prueba,
     y_pred_logistico,
-    average="weighted"
+    average="weighted",
+    zero_division=0
     )
 
     recall_log = recall_score(
     y_prueba,
     y_pred_logistico,
-    average="weighted"
+    average="weighted",
+    zero_division=0
     )
 
     f1_log = f1_score(
     y_prueba,
     y_pred_logistico,
-    average="weighted"
+    average="weighted",
+    zero_division=0
     )
 
     print("\nREGRESIÓN LOGÍSTICA")
@@ -63,7 +66,8 @@ def evaluar_modelos(
     print(
         classification_report(
             y_prueba,
-            y_pred_logistico
+            y_pred_logistico,
+            zero_division=0
         )
     )
 
@@ -99,19 +103,22 @@ def evaluar_modelos(
     precision_arbol = precision_score(
         y_prueba,
         y_pred_arbol,
-        average="weighted"
+        average="weighted",
+        zero_division=0
     )
 
     recall_arbol = recall_score(
         y_prueba,
         y_pred_arbol,
-        average="weighted"
+        average="weighted",
+        zero_division=0
     )   
 
     f1_arbol = f1_score(
         y_prueba,
         y_pred_arbol,
-        average="weighted"
+        average="weighted",
+        zero_division=0
     )
     
     print("\n ARBOL DE DECISIÓN")
@@ -126,9 +133,10 @@ def evaluar_modelos(
     print(
         classification_report(
             y_prueba,
-            y_pred_arbol
-        )
-    )
+            y_pred_arbol,
+            zero_division=0
+        ))
+    
 
     #modelo de arbol de decisión
     cm_arbol = confusion_matrix(
