@@ -39,23 +39,24 @@ def generar_transformaciones(almacen_datos):
     logging.info(f"Valores nulos encontrados: {nulos.sum()}")
     
 
-    #normalizar fechas
+    # Normalización de fechas
     if "fecha" in df.columns:
-
-    # Convertir múltiples formatos automáticamente
         df["fecha"] = pd.to_datetime(
-            df["fecha"],
-            errors="coerce",
-            dayfirst=True
-        )
-    
+        df["fecha"],
+        errors="coerce",
+        format="mixed"
+    )
+
     fechas_invalidas = df["fecha"].isnull().sum()
 
-    print(f"Fechas inválidas detectadas: {fechas_invalidas}")
+    print(f"[INFO] Fechas inválidas detectadas: {fechas_invalidas}")
     logging.info(f"Fechas inválidas detectadas: {fechas_invalidas}")
 
-    # transformar la fecha al formato YYYY-MM-DD
+    # Convertir al formato estándar
     df["fecha"] = df["fecha"].dt.strftime("%Y-%m-%d")
+
+    print("[INFO] Fechas normalizadas correctamente.")
+    logging.info("Fechas normalizadas correctamente.")
 
     print("[INFO] Fechas cambiadas correctamente.")
     logging.info("Fechas cambiadas correctamente.")
@@ -114,6 +115,7 @@ def generar_transformaciones(almacen_datos):
 
     #validación de edades negativas
     edades_invalidas = df[df["edad"] < 0]
+    df = df[df["edad"] >= 0]
 
     if len(edades_invalidas) > 0:
 

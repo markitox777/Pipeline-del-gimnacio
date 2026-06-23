@@ -16,6 +16,11 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+#importamos las funciones de exploración, entrenamiento y evaluación
+from ia.exploracion import explorar_datos
+from ia.entrenamiento import entrenar_modelos
+from ia.evaluacion import evaluar_modelos
+from ia.feature_importance import importancia_variables
 
 def ejecutar_pipeline():
 
@@ -129,6 +134,21 @@ def ejecutar_pipeline():
     logging.info(f"Porcentaje completitud: {completitud:.2f}%")
     logging.info(f"Tiempo total ejecución: {tiempo_ejecucion:.2f} segundos")
 
+    explorar_datos(df)
+
+    resultado_modelos = entrenar_modelos(df)
+
+    evaluar_modelos(
+        resultado_modelos["modelo_logistico"],
+        resultado_modelos["modelo_arbol"],
+        resultado_modelos["X_test"],
+        resultado_modelos["y_test"]
+    )
+    #llamamos a la función de importancia de variables para el modelo de árbol de decisión
+    importancia_variables(
+    resultado_modelos["modelo_arbol"]
+    )
+
     #mostramos los datos de los kpis
     with open("output/kpis.txt", "w") as archivo:
         archivo.write(f"KPI 1 - Total registros: {total_registros}\n")
@@ -139,6 +159,7 @@ def ejecutar_pipeline():
         archivo.write(f"KPI 6 - Porcentaje completitud: {completitud:.2f}%\n")
         archivo.write(f"KPI 7 - Tiempo total ejecución: {tiempo_ejecucion:.2f} segundos\n")
     return almacen_datos
+
 
 
 
