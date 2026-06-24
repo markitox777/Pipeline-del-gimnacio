@@ -141,7 +141,7 @@ def ejecutar_pipeline():
     evaluar_modelos(
         resultado_modelos["modelo_logistico"],
         resultado_modelos["modelo_arbol"],
-        resultado_modelos["X_test"],
+        resultado_modelos["X_test"], #tipo de edad joven, adulto, adulto mayor y menor de edad
         resultado_modelos["y_test"]
     )
     #llamamos a la función de importancia de variables para el modelo de árbol de decisión
