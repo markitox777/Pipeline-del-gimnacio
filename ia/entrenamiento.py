@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split #80% entrenamiento y 20% prueba
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
